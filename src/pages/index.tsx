@@ -103,7 +103,7 @@ export default function Home({ initialBlogs }: props) {
   </div>
 
   return (
-    <div id={styles.container}>
+    <div data-testid="container" id={styles.container}>
         {content}
     </div>
   )

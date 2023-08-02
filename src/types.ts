@@ -4,7 +4,7 @@ interface BlogType {
     avatar_url: string
     location: string
     body: string
-    timestamp: number
+    timestamp: string
     isFav?: boolean
     isPinned?: boolean
 }
@@ -15,7 +15,7 @@ interface BlogCardProps {
     avatar_url: string
     location: string
     body: string
-    timestamp: number
+    timestamp: string
     isFav: boolean
     isPinned: boolean
     setFav: Function

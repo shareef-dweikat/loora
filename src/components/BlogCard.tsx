@@ -45,14 +45,14 @@ function BlogCard({ title, body, username, location, avatar_url, timestamp, setF
   });
 
   return (
-    <div id={styles.container}>
+    <div data-testid="blog-card" id={styles.container}>
       <div id={styles.header}>
         <ImageComponent />
         <span>
-          <span onClick={() => setFav({ timestamp, username, location, title })} className={styles.headerIcon}>
+          <span data-testid="fav-button" onClick={() => setFav({ timestamp, username, location, title })} className={styles.headerIcon}>
             <HEART color={isFav ? RED : ""} />
           </span>
-          <span onClick={() => setPin({ timestamp, username, location, title })}>
+          <span data-testid="pin-button" onClick={() => setPin({ timestamp, username, location, title })}>
             <PIN color={isPinned ? RED : ""} />
           </span>
         </span>
@@ -84,7 +84,7 @@ function BlogCard({ title, body, username, location, avatar_url, timestamp, setF
             <Image src={CLOCK} alt={NO_IMAGE} width={24} height={24} />
           </span>
           <span className={`${styles.footerText} ${openSansRegular.className}`}>
-            {format(new Date(timestamp), 'HH:mm:SS a')}
+            {format(new Date(parseInt(timestamp)), 'HH:mm:SS a')}
           </span>
         </span>
       </div>
