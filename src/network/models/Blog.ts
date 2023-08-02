@@ -4,7 +4,7 @@ export default class Blog {
     avatar_url = ''
     location = ''
     body = ''
-    timestamp = 0
+    timestamp = ''
     constructor(
         {
             username,
@@ -21,7 +21,7 @@ export default class Blog {
         this.avatar_url = avatar_url
         this.location = location
         this.body = body
-        this.timestamp = Number(timestamp)
+        this.timestamp = timestamp
     }
 
 }

@@ -1,5 +1,5 @@
 import Blog from "../models/Blog"
-import { FEED_ENDPOINT } from '../endpoints'
+import { FEED_ENDPOINT } from '../../constants/endpoints'
 
 export const getFeed = async () => {
     let response = await fetch(FEED_ENDPOINT)

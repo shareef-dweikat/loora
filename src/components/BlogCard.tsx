@@ -69,13 +69,13 @@ function BlogCard({ title, body, username, location, avatar_url, timestamp, setF
             <span className={styles.footerIcon}>
               <Image src={PERSON} alt={NO_IMAGE} width={24} height={24} />
             </span>
-            <span className={`${styles.footerText} ${openSansRegular.className}`}>{username}</span>
+            <span className={`${styles.footerText} ${openSansRegular.className} ${styles.capitalize}`}>{username}</span>
           </span>
           <span className={styles.tag}>
             <span className={styles.footerIcon}>
               <Image src={LOCATION} alt={NO_IMAGE} width={24} height={24} />
             </span>
-            <span className={`${styles.footerText} ${openSansRegular.className}`}>{location}</span>
+            <span className={`${styles.footerText} ${openSansRegular.className} ${styles.capitalize}`}>{location}</span>
           </span>
         </span>
 
@@ -84,7 +84,7 @@ function BlogCard({ title, body, username, location, avatar_url, timestamp, setF
             <Image src={CLOCK} alt={NO_IMAGE} width={24} height={24} />
           </span>
           <span className={`${styles.footerText} ${openSansRegular.className}`}>
-            {format(new Date(parseInt(timestamp)), 'HH:mm:SS a')}
+            {format(new Date(parseFloat(timestamp)), 'HH:mm:SS a')}
           </span>
         </span>
       </div>

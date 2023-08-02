@@ -43,7 +43,7 @@ export default function Home({ initialBlogs }: props) {
   const intervalHaldner = async function () {
     const feed = await getFeed()
     if (feed.status) {
-      const sorted = feed.blogs.sort((a, b) => b.timestamp - a.timestamp)
+      const sorted: BlogType[] = feed.blogs.sort((a, b) => parseFloat(b.timestamp) - parseFloat(a.timestamp))
       setBlogs(sorted)
     }
   }
@@ -112,5 +112,5 @@ export default function Home({ initialBlogs }: props) {
 
 export async function getServerSideProps(context: any) {
   const feed = await getFeed()
-  return { props: { initialBlogs: JSON.stringify(feed.blogs.sort((a, b) => b.timestamp - a.timestamp)) } }
+  return { props: { initialBlogs: JSON.stringify(feed.blogs.sort((a, b) => parseFloat(b.timestamp) - parseFloat(a.timestamp))) } }
 }

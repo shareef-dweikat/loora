@@ -86,6 +86,9 @@
     background-color: rgba(224, 224, 224, 0.6);
 }
 
+.capitalize {
+ text-transform: capitalize;
+}
 
 @media only screen and (max-width: 27em ) {
     #footer {
