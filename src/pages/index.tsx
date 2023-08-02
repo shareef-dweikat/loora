@@ -4,7 +4,6 @@ import { getFeed } from '../network/controllers/feed'
 import { Open_Sans } from 'next/font/google'
 import { NO_BLOGS_TO_SHOW } from '../constants/strings'
 import styles from '../styles/Home.module.css'
-import fetch from 'node-fetch';
 
 export interface props {
   initialBlogs: string

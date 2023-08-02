@@ -40,14 +40,16 @@ const PIN = ({ color }) => {
 
 function BlogCard({ title, body, username, location, avatar_url, timestamp, setFav, setPin, isPinned, isFav }: BlogCardProps) {
 
-  const ImageComponent = memo(() => {
+  const AvatarImg = memo(() => {
     return <Image src={avatar_url} alt={NO_IMAGE} id={styles.img} width={56} height={56} />
   });
+
+  AvatarImg.displayName = 'AvatarImg';
 
   return (
     <div data-testid="blog-card" id={styles.container}>
       <div id={styles.header}>
-        <ImageComponent />
+        <AvatarImg />
         <span>
           <span data-testid="fav-button" onClick={() => setFav({ timestamp, username, location, title })} className={styles.headerIcon}>
             <HEART color={isFav ? RED : ""} />

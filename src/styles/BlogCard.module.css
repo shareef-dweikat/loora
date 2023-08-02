@@ -87,14 +87,14 @@
 }
 
 .capitalize {
- text-transform: capitalize;
+    text-transform: capitalize;
 }
 
-@media only screen and (max-width: 27em ) {
+@media only screen and (max-width: 27em) {
     #footer {
         flex-direction: column;
     }
-    
+
     #footerRightSide {
         flex-direction: column;
     }
