@@ -23,7 +23,6 @@ export default function Home({ initialBlogs }: props) {
   const sortedBlogs = blogs.length === 0 ? JSON.parse(initialBlogs) : blogs
 
   const setFav = useCallback((blog: BlogType) => {
-    console.log("Gooaaaaal")
     const key = blog.timestamp + blog.username + blog.location + blog.title
     if (favMap[key] === true) {
       setFavMap({ ...favMap, [key]: false })
