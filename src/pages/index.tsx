@@ -16,19 +16,19 @@ const openSansBold = Open_Sans({
 
 export default function Home({ initialBlogs }: props) {
   const [blogs, setBlogs] = useState<BlogType[]>([])
-  const [favMap, setFavMap] = useState({})
+  const [likesMap, setLikesMap] = useState({})
   const [pinMap, setPinMap] = useState({})
 
   const sortedBlogs = blogs.length === 0 ? JSON.parse(initialBlogs) : blogs
 
-  const setFav = useCallback((blog: BlogType) => {
+  const setLike = useCallback((blog: BlogType) => {
     const key = blog.timestamp + blog.username + blog.location + blog.title
-    if (favMap[key] === true) {
-      setFavMap({ ...favMap, [key]: false })
+    if (likesMap[key] === true) {
+      setLikesMap({ ...likesMap, [key]: false })
       return
     }
-    setFavMap({ ...favMap, [key]: true })
-  }, [favMap])
+    setLikesMap({ ...likesMap, [key]: true })
+  }, [likesMap])
 
   const setPin = useCallback((blog: BlogType) => {
     const key = blog.timestamp + blog.username + blog.location + blog.title
@@ -60,13 +60,15 @@ export default function Home({ initialBlogs }: props) {
 
   const filtered = sortedBlogs.filter((blog: BlogType) => {
     const key = blog.timestamp + blog.username + blog.location + blog.title
+
+    //Eliminate duplicate blogs
     const duplicate = seen.has(key);
     seen.add(key);
     if (duplicate) return false
 
-    if (favMap[key] === true) {
-      blog.isFav = true
-    } else { blog.isFav = false }
+    if (likesMap[key] === true) {
+      blog.isLiked = true
+    } else { blog.isLiked = false }
 
     if (pinMap[key] === true) {
       blog.isPinned = true
@@ -83,10 +85,10 @@ export default function Home({ initialBlogs }: props) {
     const id = blog.timestamp + blog.username + blog.location + blog.title
     return <BlogCard
       key={id}
-      setFav={setFav}
+      setLike={setLike}
       setPin={setPin}
       isPinned={blog.isPinned}
-      isFav={blog.isFav}
+      isLiked={blog.isLiked}
       timestamp={blog.timestamp}
       avatar_url={blog.avatar_url}
       username={blog.username}

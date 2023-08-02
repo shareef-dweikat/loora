@@ -5,7 +5,7 @@ interface BlogType {
     location: string
     body: string
     timestamp: string
-    isFav?: boolean
+    isLiked?: boolean
     isPinned?: boolean
 }
 
@@ -16,9 +16,9 @@ interface BlogCardProps {
     location: string
     body: string
     timestamp: string
-    isFav: boolean
+    isLiked: boolean
     isPinned: boolean
-    setFav: Function
+    setLike: Function
     setPin: Function
 }
 

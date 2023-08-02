@@ -31,20 +31,20 @@ describe('Home', () => {
 
   it('renders the page with blogs and fire like button', async () => {
     render(<Home initialBlogs={JSON.stringify(response.feed)} />)
-    const button = screen.getAllByTestId("fav-button")[0]
+    const button = screen.getAllByTestId("like-button")[0]
     fireEvent.click(button);
 
-    const icons = screen.getAllByTestId("fav-icon")[0]
+    const icons = screen.getAllByTestId("like-icon")[0]
     expect(icons.getAttribute('fill')).toEqual(RED)
   })
 
   it('renders the page with blogs and double fire like button', async () => {
     render(<Home initialBlogs={JSON.stringify(response.feed)} />)
-    const button = screen.getAllByTestId("fav-button")[0]
+    const button = screen.getAllByTestId("like-button")[0]
     fireEvent.click(button);
     fireEvent.click(button);
 
-    const icons = screen.getAllByTestId("fav-icon")[0]
+    const icons = screen.getAllByTestId("like-icon")[0]
     expect(icons.getAttribute('fill')).not.toEqual(RED)
   })
 

@@ -21,7 +21,7 @@ const openSansRegular = Open_Sans({
 
 const HEART = ({ color }) => {
   return (
-    <svg data-testid="fav-icon" width="24" height="24" viewBox="0 0 24 24" fill={color} xmlns="http://www.w3.org/2000/svg">
+    <svg data-testid="like-icon" width="24" height="24" viewBox="0 0 24 24" fill={color} xmlns="http://www.w3.org/2000/svg">
       <path d="m12 20.975-1.025-.925c-1.763-1.619-3.22-3.015-4.372-4.189-1.152-1.174-2.07-2.224-2.753-3.149-.683-.925-1.163-1.762-1.438-2.512A6.564 6.564 0 0 1 2 7.925c0-1.503.504-2.757 1.513-3.764C4.52 3.154 5.767 2.65 7.25 2.65c.95 0 1.83.225 2.637.675.809.45 1.513 1.1 2.113 1.95.7-.9 1.442-1.563 2.225-1.988a5.213 5.213 0 0 1 2.525-.637c1.483 0 2.73.504 3.738 1.51C21.495 5.169 22 6.423 22 7.926c0 .767-.137 1.525-.413 2.275-.274.75-.754 1.588-1.437 2.513-.683.925-1.601 1.974-2.753 3.148-1.152 1.174-2.61 2.57-4.372 4.189L12 20.975zM12 19c1.687-1.55 3.076-2.88 4.165-3.988 1.09-1.108 1.956-2.079 2.598-2.912.641-.833 1.091-1.576 1.35-2.228.258-.653.387-1.3.387-1.943 0-1.103-.35-2.008-1.05-2.717-.7-.708-1.598-1.062-2.694-1.062-.86 0-1.654.262-2.385.787-.73.525-1.321 1.263-1.771 2.213h-1.225c-.433-.933-1.015-1.667-1.746-2.2-.731-.533-1.526-.8-2.385-.8-1.096 0-1.994.354-2.694 1.062-.7.709-1.05 1.616-1.05 2.72 0 .646.13 1.297.388 1.955.258.659.708 1.409 1.35 2.25.641.842 1.512 1.813 2.612 2.913 1.1 1.1 2.483 2.417 4.15 3.95z" />
     </svg>
 
@@ -38,7 +38,7 @@ const PIN = ({ color }) => {
 };
 
 
-function BlogCard({ title, body, username, location, avatar_url, timestamp, setFav, setPin, isPinned, isFav }: BlogCardProps) {
+function BlogCard({ title, body, username, location, avatar_url, timestamp, setLike, setPin, isPinned, isLiked }: BlogCardProps) {
 
   const AvatarImg = memo(() => {
     return <Image aria-label={AVATAR_IMG} src={avatar_url} alt={NO_IMAGE} id={styles.img} width={56} height={56} />
@@ -51,8 +51,8 @@ function BlogCard({ title, body, username, location, avatar_url, timestamp, setF
       <div id={styles.header}>
         <AvatarImg />
         <span>
-          <span aria-label={LIKE_BTN} data-testid="fav-button" onClick={() => setFav({ timestamp, username, location, title })} className={styles.headerIcon}>
-            <HEART color={isFav ? RED : ""} />
+          <span aria-label={LIKE_BTN} data-testid="like-button" onClick={() => setLike({ timestamp, username, location, title })} className={styles.headerIcon}>
+            <HEART color={isLiked ? RED : ""} />
           </span>
           <span aria-label={PIN_BTN} data-testid="pin-button" onClick={() => setPin({ timestamp, username, location, title })}>
             <PIN color={isPinned ? RED : ""} />
@@ -94,7 +94,7 @@ function BlogCard({ title, body, username, location, avatar_url, timestamp, setF
             <Image src={CLOCK} alt={NO_IMAGE} width={24} height={24} />
           </span>
           <span className={`${styles.footerText} ${openSansRegular.className}`} aria-label={TIME_PUBLISHED}>
-            {format(new Date(parseFloat(timestamp)), 'HH:mm:SS a')}
+            {format(new Date(parseFloat(timestamp)), 'HH:mm:ss a')}
           </span>
         </span>
       </footer>
