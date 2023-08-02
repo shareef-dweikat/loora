@@ -1,5 +1,5 @@
 import styles from '../styles/BlogCard.module.css'
-import { NO_IMAGE } from '../constants/strings'
+import { AVATAR_IMG, BLOG_SHORT_BODY, LIKE_BTN, NO_IMAGE, PIN_BTN, TIME_PUBLISHED, USERNAME } from '../constants/strings'
 import { RED } from '../constants/colors'
 import { Open_Sans } from 'next/font/google'
 import Image from 'next/image'
@@ -41,7 +41,7 @@ const PIN = ({ color }) => {
 function BlogCard({ title, body, username, location, avatar_url, timestamp, setFav, setPin, isPinned, isFav }: BlogCardProps) {
 
   const AvatarImg = memo(() => {
-    return <Image src={avatar_url} alt={NO_IMAGE} id={styles.img} width={56} height={56} />
+    return <Image aria-label={AVATAR_IMG} src={avatar_url} alt={NO_IMAGE} id={styles.img} width={56} height={56} />
   });
 
   AvatarImg.displayName = 'AvatarImg';
@@ -51,33 +51,41 @@ function BlogCard({ title, body, username, location, avatar_url, timestamp, setF
       <div id={styles.header}>
         <AvatarImg />
         <span>
-          <span data-testid="fav-button" onClick={() => setFav({ timestamp, username, location, title })} className={styles.headerIcon}>
+          <span aria-label={LIKE_BTN} data-testid="fav-button" onClick={() => setFav({ timestamp, username, location, title })} className={styles.headerIcon}>
             <HEART color={isFav ? RED : ""} />
           </span>
-          <span data-testid="pin-button" onClick={() => setPin({ timestamp, username, location, title })}>
+          <span aria-label={PIN_BTN} data-testid="pin-button" onClick={() => setPin({ timestamp, username, location, title })}>
             <PIN color={isPinned ? RED : ""} />
           </span>
         </span>
       </div>
 
       <div id={styles.title} className={openSansBold.className}>{title}</div>
-      <div id={styles.description} className={openSansRegular.className}>
+      <p id={styles.description} className={openSansRegular.className} aria-label={BLOG_SHORT_BODY}>
         {body}
-      </div>
+      </p>
 
-      <div id={styles.footer}>
+      <footer id={styles.footer}>
         <span id={styles.footerRightSide}>
           <span className={styles.tag}>
             <span className={styles.footerIcon}>
               <Image src={PERSON} alt={NO_IMAGE} width={24} height={24} />
             </span>
-            <span className={`${styles.footerText} ${openSansRegular.className} ${styles.capitalize}`}>{username}</span>
+            <span
+              className={`${styles.footerText} ${openSansRegular.className} ${styles.capitalize}`}
+              aria-label={USERNAME}>
+              {username}
+            </span>
           </span>
           <span className={styles.tag}>
             <span className={styles.footerIcon}>
               <Image src={LOCATION} alt={NO_IMAGE} width={24} height={24} />
             </span>
-            <span className={`${styles.footerText} ${openSansRegular.className} ${styles.capitalize}`}>{location}</span>
+            <span
+              className={`${styles.footerText} ${openSansRegular.className} ${styles.capitalize}`}
+              aria-label={LOCATION}>
+              {location}
+            </span>
           </span>
         </span>
 
@@ -85,11 +93,11 @@ function BlogCard({ title, body, username, location, avatar_url, timestamp, setF
           <span className={styles.footerIcon}>
             <Image src={CLOCK} alt={NO_IMAGE} width={24} height={24} />
           </span>
-          <span className={`${styles.footerText} ${openSansRegular.className}`}>
+          <span className={`${styles.footerText} ${openSansRegular.className}`} aria-label={TIME_PUBLISHED}>
             {format(new Date(parseFloat(timestamp)), 'HH:mm:SS a')}
           </span>
         </span>
-      </div>
+      </footer>
     </div>
   )
 }

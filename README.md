@@ -2,7 +2,7 @@
 
 If you want to test performance using Chrome Lighthouse or Chrome Performance tools, please make sure you do it on a production build.
 
-To produce a production build
+To run a production build
 ```
 npm run build
 npm run start
