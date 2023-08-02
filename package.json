@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "jest --watch --coverage",
+    "test": "jest test --coverage --watchAll",
     "test:ci": "jest --ci"
   },
   "dependencies": {
