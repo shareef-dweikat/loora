@@ -4,6 +4,7 @@ import { getFeed } from '../network/controllers/feed'
 import { Open_Sans } from 'next/font/google'
 import { NO_BLOGS_TO_SHOW } from '../constants/strings'
 import styles from '../styles/Home.module.css'
+import fetch from 'node-fetch';
 
 export interface props {
   initialBlogs: string
@@ -22,6 +23,7 @@ export default function Home({ initialBlogs }: props) {
   const sortedBlogs = blogs.length === 0 ? JSON.parse(initialBlogs) : blogs
 
   const setFav = useCallback((blog: BlogType) => {
+    console.log("Gooaaaaal")
     const key = blog.timestamp + blog.username + blog.location + blog.title
     if (favMap[key] === true) {
       setFavMap({ ...favMap, [key]: false })
@@ -39,16 +41,16 @@ export default function Home({ initialBlogs }: props) {
     setPinMap({ ...pinMap, [key]: true })
   }, [pinMap])
 
+  const intervalHaldner = async function () {
+    const feed = await getFeed()
+    if (feed.status) {
+      const sorted = feed.blogs.sort((a, b) => b.timestamp - a.timestamp)
+      setBlogs(sorted)
+    }
+  }
 
   useEffect(() => {
-    const feedSync = setInterval(async function () {
-      const feed = await getFeed()
-      if (feed.status) {
-        const sorted = feed.blogs.sort((a, b) => b.timestamp - a.timestamp)
-        setBlogs(sorted)
-      }
-    }, 5000);
-
+    const feedSync = setInterval(intervalHaldner, 5000);
     return function clear() {
       clearInterval(feedSync);
     };
@@ -62,7 +64,7 @@ export default function Home({ initialBlogs }: props) {
     const key = blog.timestamp + blog.username + blog.location + blog.title
     const duplicate = seen.has(key);
     seen.add(key);
-    if(duplicate) return false
+    if (duplicate) return false
 
     if (favMap[key] === true) {
       blog.isFav = true
@@ -104,7 +106,7 @@ export default function Home({ initialBlogs }: props) {
 
   return (
     <div data-testid="container" id={styles.container}>
-        {content}
+      {content}
     </div>
   )
 }
